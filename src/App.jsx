@@ -5,7 +5,10 @@ import { logoutAction } from "./actions";
 import "./App.scss";
 import Error from "./Errors/Error";
 import Main, { MainLayoutLoader } from "./Layouts/Main/Main";
-import DashBoard, { DashBoardLoader } from "./pages/DashBoard/DashBoard";
+import DashBoard, {
+  DashBoardAction,
+  DashBoardLoader,
+} from "./pages/DashBoard/DashBoard";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +21,7 @@ const router = createBrowserRouter([
         index: true,
         element: <DashBoard />,
         loader: DashBoardLoader,
+        action: DashBoardAction,
         errorElement: <Error />,
       },
       {
@@ -31,8 +35,10 @@ const router = createBrowserRouter([
 function App() {
   return (
     <>
-      <RouterProvider router={router} />
-      <ToastContainer />
+      <div className="App">
+        <RouterProvider router={router} />
+        <ToastContainer />
+      </div>
     </>
   );
 }
