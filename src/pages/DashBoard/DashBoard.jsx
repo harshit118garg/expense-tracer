@@ -3,6 +3,7 @@ import { useLoaderData, redirect } from "react-router-dom";
 import { fetchData } from "../../helpers";
 import Intro from "../../components/Intro/Intro";
 import { toast } from "react-toastify";
+import { Container } from "react-bootstrap";
 
 export function DashBoardLoader() {
   const userName = fetchData("userName");
@@ -28,7 +29,22 @@ export async function DashBoardAction({ request }) {
 const DashBoard = () => {
   const { userName } = useLoaderData();
 
-  return <>{userName ? <p>{userName}</p> : <Intro />}</>;
+  return (
+    <>
+      {userName ? (
+        <Container className="bg-danger bg-gradient mt-4 h-100">
+          <h2 className="display-3">
+            Welcome Back{" "}
+            <span className="text-white text-uppercase fw-bolder">
+              {userName}
+            </span>
+          </h2>
+        </Container>
+      ) : (
+        <Intro />
+      )}
+    </>
+  );
 };
 
 export default DashBoard;

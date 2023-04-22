@@ -1,8 +1,8 @@
 import React from "react";
-import { Button, Col, Row } from "react-bootstrap";
-import { BiArrowBack } from "react-icons/bi";
+import { Button } from "react-bootstrap";
 import { AiOutlineHome } from "react-icons/ai";
-import { useRouteError, Link, useNavigate } from "react-router-dom";
+import { BiArrowBack } from "react-icons/bi";
+import { Link, useNavigate, useRouteError } from "react-router-dom";
 
 const Error = () => {
   const error = useRouteError();

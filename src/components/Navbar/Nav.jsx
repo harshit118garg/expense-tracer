@@ -36,7 +36,7 @@ const Nav = ({ userName }) => {
             >
               <Button
                 type="submit"
-                className="btn-outline-warning text-white fs-4"
+                className="btn-warning btn-outline-warning text-white fs-4"
               >
                 Delete User &nbsp;
                 <MdOutlineDelete />
