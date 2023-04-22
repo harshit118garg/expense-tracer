@@ -30,6 +30,7 @@ const Intro = () => {
                 placeholder="Enter your Name Please!"
                 aria-label="Enter your Name Please!"
               />
+              <input type="hidden" name="_action" value="newUser" />
               <Button type="submit" variant="warning" className="fs-3">
                 Create Account <FiUserPlus />
               </Button>

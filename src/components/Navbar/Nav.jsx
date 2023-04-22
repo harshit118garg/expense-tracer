@@ -6,7 +6,7 @@ import mobilePay from "../../assets/mobilePay.svg";
 
 const Nav = ({ userName }) => {
   return (
-    <Navbar bg="warning" className="shadow w-100" sticky="top">
+    <Navbar bg="warning" className="shadow w-100">
       <Container className="d-flex justify-content-between">
         <NavLink to="/" aria-label="Go to Home">
           <Navbar.Brand>
