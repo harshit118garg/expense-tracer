@@ -36,6 +36,9 @@ export const createExpense = ({ name, amount, budgetID }) => {
   );
 };
 
+export const formatDateToLocaleString = (str) =>
+  new Date(str).toLocaleDateString();
+
 //delete item
 export const deleteItem = ({ key }) => {
   return localStorage.removeItem(key);

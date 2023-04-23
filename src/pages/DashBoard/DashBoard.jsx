@@ -7,11 +7,12 @@ import AddExpenseForm from "../../components/AddExpenseForm/AddExpenseForm";
 import BudgetItem from "../../components/BudgetItem/BudgetItem";
 import Intro from "../../components/Intro/Intro";
 import { createBudget, createExpense, fetchData, wait } from "../../helpers";
+import ExpensesTable from "../../components/ExpensesTable/ExpensesTable";
 
 export function DashBoardLoader() {
   const userName = fetchData("userName");
   const budgets = fetchData("budgets");
-  const expenses = fetchData("expenses"); 
+  const expenses = fetchData("expenses");
   return { userName, budgets, expenses };
 }
 
@@ -122,6 +123,24 @@ const DashBoard = () => {
                     })}
                   </Row>
                 </Container>
+                {expenses && expenses.length > 0 && (
+                  <Container className="bg-success bg-gradient rounded-3 shadow-lg my-4 h-100">
+                    <div className="expense-info">
+                      <h2 className="display-3 text-center">
+                        Existing{" "}
+                        <span className="text-white text-uppercase fw-bolder">
+                          Expenses
+                        </span>
+                      </h2>
+                      <div className="line-break"></div>
+                    </div>
+                    <ExpensesTable
+                      expenses={expenses.sort(
+                        (a, b) => b.createdAt - a.createdAt
+                      )}
+                    />
+                  </Container>
+                )}
               </>
             ) : (
               <Row xs={1} sm={1} lg={1} xl={1} md={1}>
