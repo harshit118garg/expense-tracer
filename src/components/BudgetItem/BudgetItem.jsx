@@ -1,6 +1,7 @@
 import React from "react";
 import { Stack, ProgressBar, Card, Button } from "react-bootstrap";
 import { calculateSpentAmount, formatCurrency } from "../../helpers";
+import { Link } from "react-router-dom";
 
 const BudgetItem = ({ budget }) => {
   const { name, amount, id } = budget;
@@ -34,7 +35,9 @@ const BudgetItem = ({ budget }) => {
             </small>
           </Stack>
           <Stack>
-            <Button variant="warning">View Details</Button>
+            <Link to={`/budget/${id}`}>
+              <Button variant="warning" size="lg">View Details</Button>
+            </Link>
           </Stack>
         </Card.Body>
       </Card>

@@ -2,12 +2,17 @@ import React from "react";
 import { Table } from "react-bootstrap";
 import ExpenseItem from "../ExpenseItem/ExpenseItem";
 
-const ExpensesTable = ({ expenses }) => {
+const ExpensesTable = ({ expenses, showBudget = true }) => {
   return (
-    <Table striped hover responsive className="my-3 expenses-table">
+    <Table striped hover bordered responsive className="my-3 expenses-table">
       <thead>
-        <tr className="bg-primary text-white">
-          {["Name", "Amount", "Date", "Budget", "Delete"].map((i, index) => (
+        <tr className="text-white">
+          {[
+            "Name",
+            "Amount",
+            "Date",
+            showBudget ? "Budget" : null,
+          ].map((i, index) => (
             <th key={index} className="text-center">
               {i}
             </th>
@@ -17,7 +22,7 @@ const ExpensesTable = ({ expenses }) => {
       <tbody>
         {expenses.map((expense) => (
           <tr className="text-center" key={expense.id}>
-            <ExpenseItem expense={expense} />
+            <ExpenseItem expense={expense} showBudget={showBudget} />
           </tr>
         ))}
       </tbody>

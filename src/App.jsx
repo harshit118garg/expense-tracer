@@ -5,6 +5,10 @@ import { logoutAction } from "./actions";
 import "./App.scss";
 import Error from "./Errors/Error";
 import Main, { MainLayoutLoader } from "./Layouts/Main/Main";
+import BudgetPage, {
+  BudgetPageAction,
+  BudgetPageLoader,
+} from "./pages/BudgetPage/BudgetPage";
 import DashBoard, {
   DashBoardAction,
   DashBoardLoader,
@@ -26,6 +30,13 @@ const router = createBrowserRouter([
         element: <DashBoard />,
         loader: DashBoardLoader,
         action: DashBoardAction,
+        errorElement: <Error />,
+      },
+      {
+        path: "budget/:id",
+        element: <BudgetPage />,
+        loader: BudgetPageLoader,
+        action: BudgetPageAction,
         errorElement: <Error />,
       },
       {

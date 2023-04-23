@@ -8,7 +8,7 @@ import { Link, useFetcher } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { BsTrash } from "react-icons/bs";
 
-const ExpenseItem = ({ expense }) => {
+const ExpenseItem = ({ expense, showBudget }) => {
   const { name, amount, id, createdAt, budgetID } = expense;
 
   const budget = getAllMatchingItems({
@@ -24,13 +24,15 @@ const ExpenseItem = ({ expense }) => {
       <td>{name}</td>
       <td>{formatCurrency(amount)}</td>
       <td>{formatDateToLocaleString(createdAt)}</td>
-      <td>
-        <Link to={`/budget/${budget.id}`}>
-          <Button variant="dark" className="fs-3">
-            {budget.name}
-          </Button>
-        </Link>
-      </td>
+      {showBudget && (
+        <td>
+          <Link to={`/budget/${budget.id}`}>
+            <Button variant="dark" className="fs-3">
+              {budget.name}
+            </Button>
+          </Link>
+        </td>
+      )}
       <td>
         <fetcher.Form method="post">
           <input type="hidden" name="_action" value="deleteExpense" />
