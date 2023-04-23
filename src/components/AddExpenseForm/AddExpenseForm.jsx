@@ -59,29 +59,31 @@ function AddExpenseForm({ budgets }) {
               </div>
             </Col>
           </Row>
-          {budgets.length > 1 && (
-            <>
-              <label htmlFor="budgetSelected" className="form-label fs-3">
-                Budget Category
-              </label>
-              <select
-                name="budgetSelected"
-                id="budgetSelected"
-                className="form-select fs-4"
-                required
-              >
-                {budgets
-                  .sort((a, b) => a.createdAt - b.createdAt)
-                  .map((budget) => {
-                    return (
-                      <option key={budget.id} value={budget.id}>
-                        {budget.name}
-                      </option>
-                    );
-                  })}
-              </select>
-            </>
-          )}
+          <Row hidden={budgets.length === 1}>
+            <Col>
+              <div>
+                <label htmlFor="budgetSelected" className="form-label fs-3">
+                  Budget Category
+                </label>
+                <select
+                  name="budgetSelected"
+                  id="budgetSelected"
+                  className="form-select fs-4"
+                  required
+                >
+                  {budgets
+                    .sort((a, b) => a.createdAt - b.createdAt)
+                    .map((budget) => {
+                      return (
+                        <option key={budget.id} value={budget.id}>
+                          {budget.name}
+                        </option>
+                      );
+                    })}
+                </select>
+              </div>
+            </Col>
+          </Row>
           <input type="hidden" name="_action" value="createnewExpense" />
           <Button
             variant="primary"
