@@ -1,6 +1,6 @@
 import React from "react";
-import { Col, Container, Row } from "react-bootstrap";
-import { redirect, useLoaderData } from "react-router-dom";
+import { Button, Col, Container, Row } from "react-bootstrap";
+import { Link, redirect, useLoaderData } from "react-router-dom";
 import { toast } from "react-toastify";
 import AddBudgetForm from "../../components/AddBudgetForm/AddBudgetForm";
 import AddExpenseForm from "../../components/AddExpenseForm/AddExpenseForm";
@@ -135,10 +135,15 @@ const DashBoard = () => {
                       <div className="line-break"></div>
                     </div>
                     <ExpensesTable
-                      expenses={expenses.sort(
-                        (a, b) => b.createdAt - a.createdAt
-                      )}
+                      expenses={expenses
+                        .sort((a, b) => b.createdAt - a.createdAt)
+                        .slice(0, 5)}
                     />
+                    {expenses.length > 5 && (
+                      <Link to="expenses">
+                        <Button variant="dark" className="fs-4">View All Expenses</Button>
+                      </Link>
+                    )}
                   </Container>
                 )}
               </>
