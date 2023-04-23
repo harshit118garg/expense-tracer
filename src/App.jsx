@@ -1,7 +1,7 @@
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import { logoutAction } from "./actions";
+import { deleteBudget, logoutAction } from "./actions";
 import "./App.scss";
 import Error from "./Errors/Error";
 import Main, { MainLayoutLoader } from "./Layouts/Main/Main";
@@ -38,6 +38,12 @@ const router = createBrowserRouter([
         loader: BudgetPageLoader,
         action: BudgetPageAction,
         errorElement: <Error />,
+        children: [
+          {
+            path: "delete",
+            action: deleteBudget,
+          },
+        ],
       },
       {
         path: "expenses",

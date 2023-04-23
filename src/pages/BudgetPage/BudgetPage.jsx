@@ -12,6 +12,7 @@ import { toast } from "react-toastify";
 import AddExpenseForm from "../../components/AddExpenseForm/AddExpenseForm";
 import ExpensesTable from "../../components/ExpensesTable/ExpensesTable";
 
+
 export async function BudgetPageLoader({ params }) {
   const budgets = await getAllMatchingItems({
     category: "budgets",
@@ -105,7 +106,7 @@ const BudgetPage = () => {
         <Row xs={1} sm={1} lg={2} xl={2} md={1}>
           <Col>
             <div className="m-4">
-              <BudgetItem budget={budget} />
+              <BudgetItem budget={budget} showDeleteButton={true} />
             </div>
           </Col>
           <Col>

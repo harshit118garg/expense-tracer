@@ -1,9 +1,10 @@
 import React from "react";
 import { Stack, ProgressBar, Card, Button } from "react-bootstrap";
 import { calculateSpentAmount, formatCurrency } from "../../helpers";
-import { Link } from "react-router-dom";
+import { BsTrash } from "react-icons/bs";
+import { Link, Form } from "react-router-dom";
 
-const BudgetItem = ({ budget }) => {
+const BudgetItem = ({ budget, showDeleteButton = false }) => {
   const { name, amount, id } = budget;
   const spentAmount = calculateSpentAmount(id);
 
@@ -35,9 +36,31 @@ const BudgetItem = ({ budget }) => {
             </small>
           </Stack>
           <Stack>
-            <Link to={`/budget/${id}`}>
-              <Button variant="warning" size="lg">View Details</Button>
-            </Link>
+            {showDeleteButton ? (
+              <Form
+                method="post"
+                action="delete"
+                onSubmit={(event) => {
+                  if (
+                    !confirm(
+                      "Are you sure to delete this budget permanently...?"
+                    )
+                  ) {
+                    event.preventDefault();
+                  }
+                }}
+              >
+                <Button type="submit" variant="warning" className="fs-4">
+                  Delete Budget <BsTrash />
+                </Button>
+              </Form>
+            ) : (
+              <Link to={`/budget/${id}`}>
+                <Button variant="warning" size="lg">
+                  View Details
+                </Button>
+              </Link>
+            )}
           </Stack>
         </Card.Body>
       </Card>
