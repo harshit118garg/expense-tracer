@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from "react";
-import { Button, Card } from "react-bootstrap";
+import { Button, Card, Row, Col } from "react-bootstrap";
 import { TbCoinRupee } from "react-icons/tb";
 import { useFetcher } from "react-router-dom";
 
@@ -26,33 +26,39 @@ function AddExpenseForm({ budgets }) {
           Expense
         </Card.Title>
         <fetcher.Form method="post" ref={formRef}>
-          <div>
-            <label htmlFor="newExpense" className="form-label fs-3">
-              Expense Name
-            </label>
-            <input
-              type="text"
-              name="newExpense"
-              id="newExpense"
-              required
-              className="form-control fs-4"
-              placeholder="e.g.. Tea, Coffee"
-              ref={focusRef}
-            />
-          </div>
-          <div>
-            <label htmlFor="newExpenseAmount" className="form-label fs-3">
-              Amount
-            </label>
-            <input
-              type="number"
-              name="newExpenseAmount"
-              id="newExpenseAmount"
-              required
-              className="form-control fs-4"
-              placeholder="e.g.. 100Rs."
-            />
-          </div>
+          <Row>
+            <Col>
+              <div>
+                <label htmlFor="newExpense" className="form-label fs-3">
+                  Expense Name
+                </label>
+                <input
+                  type="text"
+                  name="newExpense"
+                  id="newExpense"
+                  required
+                  className="form-control fs-4"
+                  placeholder="e.g.. Tea, Coffee"
+                  ref={focusRef}
+                />
+              </div>
+            </Col>
+            <Col>
+              <div>
+                <label htmlFor="newExpenseAmount" className="form-label fs-3">
+                  Amount
+                </label>
+                <input
+                  type="number"
+                  name="newExpenseAmount"
+                  id="newExpenseAmount"
+                  required
+                  className="form-control fs-4"
+                  placeholder="e.g.. 100Rs."
+                />
+              </div>
+            </Col>
+          </Row>
           {budgets.length > 1 && (
             <>
               <label htmlFor="budgetSelected" className="form-label fs-3">

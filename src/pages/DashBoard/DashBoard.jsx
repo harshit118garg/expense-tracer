@@ -3,14 +3,15 @@ import { Col, Container, Row } from "react-bootstrap";
 import { redirect, useLoaderData } from "react-router-dom";
 import { toast } from "react-toastify";
 import AddBudgetForm from "../../components/AddBudgetForm/AddBudgetForm";
-import Intro from "../../components/Intro/Intro";
-import { fetchData, createBudget, wait, createExpense } from "../../helpers";
 import AddExpenseForm from "../../components/AddExpenseForm/AddExpenseForm";
+import BudgetItem from "../../components/BudgetItem/BudgetItem";
+import Intro from "../../components/Intro/Intro";
+import { createBudget, createExpense, fetchData, wait } from "../../helpers";
 
 export function DashBoardLoader() {
   const userName = fetchData("userName");
   const budgets = fetchData("budgets");
-  const expenses = fetchData("expenses");
+  const expenses = fetchData("expenses"); 
   return { userName, budgets, expenses };
 }
 
@@ -19,7 +20,6 @@ export async function DashBoardAction({ request }) {
 
   const data = await request.formData();
   const { _action, ...values } = Object.fromEntries(data);
-  console.log("expense -> ", values);
 
   if (_action === "newUser") {
     try {
@@ -89,18 +89,40 @@ const DashBoard = () => {
             </h2>
             <div className="line-break"></div>
             {budgets && budgets.length > 0 ? (
-              <Row xs={1} sm={2} lg={2} xl={2} md={2}>
-                <Col>
-                  <div className="create-budget-form m-4">
-                    <AddBudgetForm />
+              <>
+                <Row xs={1} sm={2} lg={2} xl={2} md={2}>
+                  <Col>
+                    <div className="create-budget-form m-4">
+                      <AddBudgetForm />
+                    </div>
+                  </Col>
+                  <Col>
+                    <div className="create-budget-form m-4">
+                      <AddExpenseForm budgets={budgets} />
+                    </div>
+                  </Col>
+                </Row>
+                <Container className="bg-secondary bg-gradient rounded-3 shadow-lg my-4 h-100">
+                  <div className="budgets-info">
+                    <h2 className="display-3 text-center">
+                      Existing{" "}
+                      <span className="text-white text-uppercase fw-bolder">
+                        Budgets
+                      </span>
+                    </h2>
+                    <div className="line-break"></div>
                   </div>
-                </Col>
-                <Col>
-                  <div className="create-budget-form m-4">
-                    <AddExpenseForm budgets={budgets} />
-                  </div>
-                </Col>
-              </Row>
+                  <Row xs={1} sm={1} lg={3} xl={3} md={2}>
+                    {budgets.map((budget) => {
+                      return (
+                        <Col key={budget.id}>
+                          <BudgetItem budget={budget} />
+                        </Col>
+                      );
+                    })}
+                  </Row>
+                </Container>
+              </>
             ) : (
               <Row xs={1} sm={1} lg={1} xl={1} md={1}>
                 <Col>
