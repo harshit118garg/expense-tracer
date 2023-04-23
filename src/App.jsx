@@ -10,6 +10,7 @@ import DashBoard, {
   DashBoardLoader,
 } from "./pages/DashBoard/DashBoard";
 import ExpensesPage, {
+  ExpensesPageAction,
   ExpensesPageLoader,
 } from "./pages/ExpensesPage/ExpensesPage";
 
@@ -31,6 +32,7 @@ const router = createBrowserRouter([
         path: "expenses",
         element: <ExpensesPage />,
         loader: ExpensesPageLoader,
+        action: ExpensesPageAction,
         errorElement: <Error />,
       },
       {

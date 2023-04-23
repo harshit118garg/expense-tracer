@@ -1,12 +1,38 @@
 import React from "react";
 import { Button, Container, Stack } from "react-bootstrap";
-import { useLoaderData, useNavigate } from "react-router-dom";
-import { fetchData } from "../../helpers";
+import { useLoaderData, useNavigate, redirect } from "react-router-dom";
+import { toast } from "react-toastify";
 import ExpensesTable from "../../components/ExpensesTable/ExpensesTable";
+import { deleteItem, fetchData, wait } from "../../helpers";
 
 export function ExpensesPageLoader() {
   const expenses = fetchData("expenses");
   return { expenses };
+}
+
+export async function ExpensesPageAction({ request }) {
+  await wait();
+
+  const data = await request.formData();
+  const { _action, ...values } = Object.fromEntries(data);
+
+  if (_action === "deleteExpense") {
+    try {
+      deleteItem({
+        key: "expenses",
+        id: values.deleteId,
+      });
+      toast.success(`You have successfully deleted your expense`, {
+        autoClose: 3000,
+        theme: "light",
+      });
+    } catch (error) {
+      toast.error("Something has happened", { autoClose: 3000 });
+      throw new Error("There was a problem deleting your expense");
+    }
+  }
+
+  return redirect("/");
 }
 
 const ExpensesPage = () => {

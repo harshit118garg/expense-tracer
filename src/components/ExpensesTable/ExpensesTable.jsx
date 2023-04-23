@@ -4,10 +4,10 @@ import ExpenseItem from "../ExpenseItem/ExpenseItem";
 
 const ExpensesTable = ({ expenses }) => {
   return (
-    <Table striped hover responsive className="my-3">
+    <Table striped hover responsive className="my-3 expenses-table">
       <thead>
         <tr className="bg-primary text-white">
-          {["Name", "Amount", "Date", "Delete"].map((i, index) => (
+          {["Name", "Amount", "Date", "Budget", "Delete"].map((i, index) => (
             <th key={index} className="text-center">
               {i}
             </th>

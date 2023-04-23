@@ -8,7 +8,7 @@ const BudgetItem = ({ budget }) => {
 
   return (
     <>
-      <Card className="bg-primary bg-gradient my-3">
+      <Card className="bg-primary bg-gradient my-3 budget-card">
         <Card.Subtitle className="pt-3 px-3">
           <Stack direction="horizontal" gap={3}>
             <p className="fs-5 bg-light border rounded-1 px-2">{name}</p>

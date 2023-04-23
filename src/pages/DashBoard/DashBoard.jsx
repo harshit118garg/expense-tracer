@@ -6,7 +6,13 @@ import AddBudgetForm from "../../components/AddBudgetForm/AddBudgetForm";
 import AddExpenseForm from "../../components/AddExpenseForm/AddExpenseForm";
 import BudgetItem from "../../components/BudgetItem/BudgetItem";
 import Intro from "../../components/Intro/Intro";
-import { createBudget, createExpense, fetchData, wait } from "../../helpers";
+import {
+  createBudget,
+  createExpense,
+  fetchData,
+  wait,
+  deleteItem,
+} from "../../helpers";
 import ExpensesTable from "../../components/ExpensesTable/ExpensesTable";
 
 export function DashBoardLoader() {
@@ -68,6 +74,22 @@ export async function DashBoardAction({ request }) {
     } catch (error) {
       toast.error("Something has happened", { autoClose: 3000 });
       throw new Error("There was a problem creating your expense");
+    }
+  }
+
+  if (_action === "deleteExpense") {
+    try {
+      deleteItem({
+        key: "expenses",
+        id: values.deleteId,
+      });
+      toast.success(`You have successfully deleted your expense`, {
+        autoClose: 3000,
+        theme: "light",
+      });
+    } catch (error) {
+      toast.error("Something has happened", { autoClose: 3000 });
+      throw new Error("There was a problem deleting your expense");
     }
   }
 
@@ -141,7 +163,9 @@ const DashBoard = () => {
                     />
                     {expenses.length > 5 && (
                       <Link to="expenses">
-                        <Button variant="dark" className="fs-4">View All Expenses</Button>
+                        <Button variant="dark" className="fs-4">
+                          View All Expenses
+                        </Button>
                       </Link>
                     )}
                   </Container>
